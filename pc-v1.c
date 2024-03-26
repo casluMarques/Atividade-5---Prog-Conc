@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 
-#define M = 8;
+#define M 8
 
 //criando a struct que armazena os argumentos a serem utilizados pela thread
 typedef struct
@@ -13,7 +13,7 @@ typedef struct
 //função a ser executada pelas Threads
 void *QuadradoVetor (void *arg){
 	t_Args args = *(t_Args*) arg;
-    for (i=args.indice; i<args.tamanho_vetor; i+M ){
+    for (int i=args.indice; i<args.tamanho_vetor; i+M ){
         args.end_vetor = args.end_vetor+args.indice;
         *args.end_vetor = *args.end_vetor * *args.end_vetor;
     }
