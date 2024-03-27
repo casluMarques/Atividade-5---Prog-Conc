@@ -66,7 +66,7 @@ int main (int argc, char* argv[]){
             }
     }
      //--espera todas as threads terminarem
-  	for (int i=0; i<nthreads; i++) {
+  	for (int i=0; i<M; i++) {
     	if (pthread_join(id_tds_sys[i], NULL)) {
          	printf("--ERRO: pthread_join() \n"); exit(-1); 
     } 
