@@ -13,8 +13,8 @@ typedef struct
 //função a ser executada pelas Threads
 void *QuadradoVetor (void *arg){
 	t_Args args = *(t_Args*) arg;
-    for (int i=args.indice; i<args.tamanho_vetor; i+M ){
-        args.end_vetor = args.end_vetor+args.indice;
+    for (int i=args.indice; i<args.tamanho_vetor; i+=M ){
+        args.end_vetor = args.end_vetor+args.indice+ i;
         *args.end_vetor = *args.end_vetor * *args.end_vetor;
     }
 	//printf("Vetor na posição %d, com valor atualizado %d\n", args.indice, *args.end_vetor);
