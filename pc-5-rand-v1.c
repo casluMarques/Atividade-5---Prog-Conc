@@ -33,15 +33,14 @@ int main (int argc, char* argv[]){
     //passando so argumentos inseridos por linha de comando para int
     nthreads = atoi(argv[1]);  
 
-	printf("Vetor a ser atualizado:\n");
-    srand(time(NULL));//inicializando o rand
 	int vec[nthreads];//vetor a ser inicializado
 	for(int i =0; i < nthreads; i++ ){ //loop para inicialização dos valores do vetor
-        int val_rand = rand() % 1000 + 1;
-		vec[i] = val_rand;
-        printf("[%d]", vec[i]);
+		int val_user;
+		printf("Valor do vetor na posição %d:\n", i);
+		scanf("%d",&val_user);
+		vec[i] = val_user;
+
 	}
-    printf("\n");
 
 
 
@@ -67,7 +66,7 @@ int main (int argc, char* argv[]){
             }
     }
      //--espera todas as threads terminarem
-  	for (int i=0; i<nthreads; i++) {
+  	for (int i=0; i<M; i++) {
     	if (pthread_join(id_tds_sys[i], NULL)) {
          	printf("--ERRO: pthread_join() \n"); exit(-1); 
     } 
@@ -75,8 +74,8 @@ int main (int argc, char* argv[]){
     printf("Fim da execução da thread MAIN\n");
 	
 	for(int i =0; i < nthreads; i++ ){ //loop para printar os valores atualizados do vetor
-		printf("Novos valores no vetor:\n");
-		printf("Posição no vetor:%d\nValor:%d\n",i, vec[i]);
+		//printf("Novos valores no vetor:\n");
+		printf("Posição no vetor:%d Valor:%d\n",i, vec[i]);
 	}
 	
     pthread_exit(NULL);
