@@ -7,15 +7,14 @@
 //criando a struct que armazena os argumentos a serem utilizados pela thread
 typedef struct
 {
-    int *end_vetor, indice, tamanho_vetor;
+    int *vetor, indice, tamanho_vetor;
 } t_Args;
 
 //função a ser executada pelas Threads
 void *QuadradoVetor (void *arg){
 	t_Args args = *(t_Args*) arg;
     for (int i=args.indice; i<args.tamanho_vetor; i+=M ){
-        args.end_vetor = args.end_vetor+args.indice+ i;
-        *args.end_vetor = *args.end_vetor * *args.end_vetor;
+        args.vetor[i] *= args.vetor[i];
     }
 	//printf("Vetor na posição %d, com valor atualizado %d\n", args.indice, *args.end_vetor);
     pthread_exit(NULL);
@@ -57,7 +56,7 @@ int main (int argc, char* argv[]){
             printf("Erro na alocação de memória\n");
             exit(-1);}
 		//int val = vec[i];
-        args->end_vetor = &vec;
+        args->vetor = vec;
 		args->indice = i;
         args->tamanho_vetor = nthreads;
         printf("##Criando thread %d\n", i);
@@ -75,8 +74,8 @@ int main (int argc, char* argv[]){
     printf("Fim da execução da thread MAIN\n");
 	
 	for(int i =0; i < nthreads; i++ ){ //loop para printar os valores atualizados do vetor
-		printf("Novos valores no vetor:\n");
-		printf("Posição no vetor:%d\nValor:%d\n",i, vec[i]);
+		//printf("Novos valores no vetor:\n");
+		printf("Posição no vetor:%d Valor:%d\n",i, vec[i]);
 	}
 	
     pthread_exit(NULL);
